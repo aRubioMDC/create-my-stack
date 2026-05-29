@@ -1,0 +1,32 @@
+{
+  "name": "create-my-stack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "create-my-stack": "./dist/index.js"
+  },
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@types/inquirer": "^9.0.9",
+    "chalk": "^5.6.2",
+    "commander": "^15.0.0",
+    "execa": "^9.6.1",
+    "inquirer": "^8.2.7",
+    "ora": "^9.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.9.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
+}
