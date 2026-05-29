@@ -5,6 +5,8 @@ export interface UserAnswers {
   stack: 'Node.js + Express' | 'Node.js + Fastify' | 'Next.js';
   database: 'PostgreSQL' | 'MongoDB' | 'MySQL' | 'Ninguna';
   cicd: 'GitHub Actions' | 'Ninguno';
+  githubToken: string;
+  isPrivate: boolean;
 }
 
 export async function askQuestions(): Promise<UserAnswers> {
@@ -32,6 +34,17 @@ export async function askQuestions(): Promise<UserAnswers> {
       name: 'cicd',
       message: '¿Deseas configurar CI/CD?',
       choices: ['GitHub Actions', 'Ninguno'],
+    },
+    {
+      type: 'password',
+      name: 'githubToken',
+      message: '¿Tu GitHub Personal Access Token?',
+    },
+    {
+      type: 'confirm',
+      name: 'isPrivate',
+      message: '¿El repositorio será privado?',
+      default: true,
     },
   ]);
 
