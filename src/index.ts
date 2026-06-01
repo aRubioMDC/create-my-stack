@@ -98,7 +98,17 @@ program
       process.exit(1);
     }
 
-    // 7. Abrir en VS Code
+    // 7. Configurar CI/CD
+    spinner = ora('Configurando CI/CD...').start();
+    try {
+      await setup.copyCICD();
+      spinner.succeed(chalk.green('CI/CD configurado.'));
+    } catch (error) {
+      spinner.fail(chalk.red(`Error al configurar CI/CD: ${(error as Error).message}`));
+      process.exit(1);
+    }
+
+    // 8. Abrir en VS Code
     spinner = ora('Abriendo en VS Code...').start();
     try {
       await setup.openInVSCode();

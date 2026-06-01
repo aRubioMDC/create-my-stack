@@ -55,6 +55,29 @@ export class SetupService {
     }
   }
 
+  async copyCICD(): Promise<void> {
+    const templateMap: Record<string, string> = {
+      'Node.js + Express': 'node-express.yml',
+      'Node.js + Fastify': 'node-fastify.yml',
+      'Next.js': 'nextjs.yml',
+    };
+
+    const templateFile = templateMap[this.stack];
+    if (!templateFile) return;
+
+    const projectDir = path.resolve(process.cwd(), this.projectName);
+    const workflowsDir = path.join(projectDir, '.github', 'workflows');
+    const src = path.join(__dirname, 'templates/github-actions/', templateFile);
+    const dest = path.join(workflowsDir, 'ci.yml');
+
+    try {
+      fs.mkdirSync(workflowsDir, { recursive: true });
+      fs.copyFileSync(src, dest);
+    } catch (error) {
+      throw new Error(`No se pudo copiar el archivo de CI/CD: ${(error as Error).message}`);
+    }
+  }
+
   // ---------------------------------------------------------------------------
   // Builders privados
   // ---------------------------------------------------------------------------
