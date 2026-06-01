@@ -3,6 +3,7 @@ import chalk from 'chalk';
 import ora from 'ora';
 import { askQuestions } from './cli';
 import { GitHubService } from './github';
+import { SetupService } from './setup';
 
 const program = new Command();
 
@@ -64,8 +65,51 @@ program
     }
 
     const repoUrl = `https://github.com/${username}/${answers.projectName}`;
+
+    const setup = new SetupService(answers.projectName, answers.stack, answers.database, username);
+
+    // 4. Clonar repositorio
+    spinner = ora('Clonando repositorio...').start();
+    try {
+      await setup.cloneRepo();
+      spinner.succeed(chalk.green('Repositorio clonado.'));
+    } catch (error) {
+      spinner.fail(chalk.red(`Error al clonar: ${(error as Error).message}`));
+      process.exit(1);
+    }
+
+    // 5. Generar archivos base
+    spinner = ora('Generando archivos base...').start();
+    try {
+      await setup.generateBaseFiles();
+      spinner.succeed(chalk.green('Archivos base generados (.env.example, README.md).'));
+    } catch (error) {
+      spinner.fail(chalk.red(`Error al generar archivos: ${(error as Error).message}`));
+      process.exit(1);
+    }
+
+    // 6. Instalar dependencias
+    spinner = ora('Instalando dependencias...').start();
+    try {
+      await setup.installDependencies();
+      spinner.succeed(chalk.green('Dependencias instaladas.'));
+    } catch (error) {
+      spinner.fail(chalk.red(`Error al instalar dependencias: ${(error as Error).message}`));
+      process.exit(1);
+    }
+
+    // 7. Abrir en VS Code
+    spinner = ora('Abriendo en VS Code...').start();
+    try {
+      await setup.openInVSCode();
+      spinner.succeed(chalk.green('Proyecto abierto en VS Code.'));
+    } catch (error) {
+      spinner.fail(chalk.yellow(`No se pudo abrir VS Code: ${(error as Error).message}`));
+    }
+
     console.log(chalk.green.bold('\n✅  ¡Proyecto listo!'));
-    console.log(`  ${chalk.dim('Repositorio:')} ${chalk.cyan(repoUrl)}\n`);
+    console.log(`  ${chalk.dim('Repositorio:')} ${chalk.cyan(repoUrl)}`);
+    console.log(`  ${chalk.dim('Siguiente paso:')} ${chalk.white(`cd ${answers.projectName} && npm run dev`)}\n`);
   });
 
 program.parse(process.argv);
