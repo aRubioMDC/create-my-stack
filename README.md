@@ -4,6 +4,8 @@
 > One command creates your GitHub repo, configures branches,
 > installs dependencies, generates CI/CD, and opens VS Code ready to work.
 
+[![npm](https://img.shields.io/npm/v/create-my-stack-cli)](https://www.npmjs.com/package/create-my-stack-cli)
+
 ## Demo
 
 ```bash
