@@ -14,36 +14,36 @@ export async function askQuestions(): Promise<UserAnswers> {
     {
       type: 'input',
       name: 'projectName',
-      message: '¿Cuál es el nombre del proyecto?',
+      message: 'What is the project name?',
       default: 'my-project',
     },
     {
       type: 'list',
       name: 'stack',
-      message: '¿Qué stack prefieres?',
+      message: 'Which stack do you prefer?',
       choices: ['Node.js + Express', 'Node.js + Fastify', 'Next.js'],
     },
     {
       type: 'list',
       name: 'database',
-      message: '¿Qué base de datos deseas usar?',
+      message: 'Which database do you want to use?',
       choices: ['PostgreSQL', 'MongoDB', 'MySQL', 'Ninguna'],
     },
     {
       type: 'list',
       name: 'cicd',
-      message: '¿Deseas configurar CI/CD?',
+      message: 'Do you want to configure CI/CD?',
       choices: ['GitHub Actions', 'Ninguno'],
     },
     {
       type: 'password',
       name: 'githubToken',
-      message: '¿Tu GitHub Personal Access Token?',
+      message: 'Your GitHub Personal Access Token?',
     },
     {
       type: 'confirm',
       name: 'isPrivate',
-      message: '¿El repositorio será privado?',
+      message: 'Will the repository be private?',
       default: true,
     },
   ]);
