@@ -27,11 +27,13 @@ npx create-my-stack-cli my-project
 
 ## Requirements
 
-- Node.js 18+
+- Node.js >= 18 (via [nvm](https://github.com/nvm-sh/nvm) or direct install)
 - Git installed
 - GitHub Personal Access Token with `repo` and `workflow` scopes
 
 → [How to create a token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens)
+
+> If using nvm, run `nvm use 18` or `nvm use --lts` before running the CLI.
 
 ## Usage
 
