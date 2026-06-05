@@ -66,7 +66,13 @@ program
 
     const repoUrl = `https://github.com/${username}/${answers.projectName}`;
 
-    const setup = new SetupService(answers.projectName, answers.stack, answers.database, username);
+    const setup = new SetupService(
+      answers.projectName,
+      answers.stack,
+      answers.database,
+      answers.cicd,
+      username,
+    );
 
     // 4. Clonar repositorio
     spinner = ora('Cloning repository...').start();

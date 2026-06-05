@@ -4,7 +4,7 @@ export interface UserAnswers {
   projectName: string;
   stack: 'Node.js + Express' | 'Node.js + Fastify' | 'Next.js';
   database: 'PostgreSQL' | 'MongoDB' | 'MySQL' | 'Ninguna';
-  cicd: 'GitHub Actions' | 'Ninguno';
+  cicd: 'GitHub Actions' | 'Azure DevOps' | 'GitLab CI' | 'None';
   githubToken: string;
   isPrivate: boolean;
 }
@@ -33,7 +33,7 @@ export async function askQuestions(): Promise<UserAnswers> {
       type: 'list',
       name: 'cicd',
       message: 'Do you want to configure CI/CD?',
-      choices: ['GitHub Actions', 'Ninguno'],
+      choices: ['GitHub Actions', 'Azure DevOps', 'GitLab CI', 'None'],
     },
     {
       type: 'password',
